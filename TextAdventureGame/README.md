@@ -17,15 +17,13 @@ We will also need a code editor to enable us to edit our code.  [Visual Studio C
 To check if the .NET SDK installed correctly, open the terminal and type in `dotnet` and press enter.
 You should see something similar to this
 <br/><br/>
-SCREENSHOTS
-![image showing dotnet in the console](/images/workshops/dotnet-check.png)
+![image showing dotnet in the console](/Screenshots/dotnet.png)
 <br/><br/>
 Now that we know the SDK is installed correctly we can make our first application.
 When you open the terminal it will most likely open in a certain folder or directory on your computer.
 If you type in `ls` and press enter, you should see a list of all the folders and files in the current directory.  It may look something like this:
 <br/><br/>
-SCREENSHOTS
-![image showing contents of new console app](/images/workshops/ls-console.png)
+![image showing contents of new console app](/Screenshots/ls.png)
 <br/><br/>
 We need to create a new directory for our code to live in.
 To make a new directory we will use the following command:
@@ -48,9 +46,8 @@ Now we are in the right folder, let's create a new .NET project.
 ```bash
 >dotnet new
 ```
-SCREENSHOTS
 <br/><br/>
-![image showing dotnet new in the console](/images/workshops/dotnet-new.png)
+![image showing dotnet new in the console](/Screenshots/dotnet%20new.png)
 <br/><br/>
 The above command will bring up all the available templates projects that came with the SDK.  We want to build a console app, so enter the following command:
 </br>
@@ -62,8 +59,7 @@ The above command will bring up all the available templates projects that came w
 This command will create a new Directory called `Adventuring` and add a new console application inside it.
 If cd into the `Adventuring` directory and list all the files we will see with have 2 files called `Program.cs` and `Adventuring.csproj`.
 <br/><br/>
-SCREENSHOTS
-![image showing contents of new console app](/images/workshops/ls-console.png)
+![image showing contents of new console app](/Screenshots/dotnet%20new%20console.png)
 <br/><br/>
 We now have a basic application that we can run.
 Type in the following command:
