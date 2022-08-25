@@ -1,18 +1,44 @@
 ﻿Console.WriteLine("Hello, What is your name?!");
-// https://github.com/spectreconsole/spectre.console
-// https://github.com/lastunicorn/ConsoleTools
-// different ways to new (instantiate) a user
-User user = new User();
-var anotherUser = new User();
-User anotherAnotherUser = new ();
-User nonInstantiatedUser;
-User nullUser = null;
 
 var name = Console.ReadLine();
 
-user.Name = name;
-
 Console.WriteLine($"Your name is {name}");
+
+int numberInParty = 0;
+
+while(numberInParty < 1)
+{
+    Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
+    string numberInPartyString = Console.ReadLine();
+
+
+    bool canConvertToInt = int.TryParse(numberInPartyString, out numberInParty);
+
+    if (canConvertToInt)
+    {
+        Console.WriteLine($"You have {numberInParty} people in your party");
+    }
+    else
+    {
+        Console.WriteLine("Give me an actual integer!!");
+    }
+}
+
+
+
+
+
+// http://plugh.com/
+
+// https://github.com/spectreconsole/spectre.console
+// https://github.com/lastunicorn/ConsoleTools
+// different ways to new (instantiate) a user
+// User user = new User();
+// var anotherUser = new User();
+// User anotherAnotherUser = new ();
+// User nonInstantiatedUser;
+// User nullUser = null;
+
 
 // using NuGet - bring in ConsoleTools library
 // loops| and conditional logic
@@ -20,41 +46,20 @@ Console.WriteLine($"Your name is {name}");
 // types
 // classes
 
-Console.WriteLine("How many eyeballs do you have?");
+// try{}catch(Exception ex){}finally{
 
-string numberOfEyeballsString = Console.ReadLine();
+// }
 
+// List<int> eyeballs = new();
 
-bool isItANumber = 
-    int.TryParse(numberOfEyeballsString, out int numberOfEyeBalls);
+// foreach(var eye in eyeballs)
+// {
 
-if(isItANumber)
-{
-  Console.WriteLine(numberOfEyeBalls);
-  Console.WriteLine($"You have {numberOfEyeBalls} many eyeballs");
-}
-else if (true){
+// }
+// while(true){
 
-}
-else
-{
-Console.WriteLine("Give me an actual integer!!");
-}
+// }
 
-try{}catch(Exception ex){}finally{
+// do{
 
-}
-
-List<int> eyeballs = new();
-
-foreach(var eye in eyeballs)
-{
-
-}
-while(true){
-
-}
-
-do{
-
-}while(true);
+// }while(true);
