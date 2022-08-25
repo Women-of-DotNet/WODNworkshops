@@ -102,7 +102,9 @@ Now if we run the project from the console, using `>dotnet run` again, you shoul
 `Console.WriteLine();` is a method from the `System` library that, in this case, takes a *string* and then writes or prints that string to the console.
 
 ## What's a *string*?
-C# is what's known as a *strongly-typed* language. A *string* is a type. It means that the contents will be treated as text.  There are many types and you can create your own types, often called *models* or *classes*.
+C# is what's known as a *strongly-typed* language. A *string* is a type. It means that the contents will be treated as text.
+These types are simple, meaning they have one value (they are often called *value types*).
+There are many types and you can create your own more complex types, often called *object*,  *models*, or *classes* - depending on where they are used.
 
 Let's see if we can get input from the console.
 
@@ -222,5 +224,79 @@ while(numberInParty < 1)
 ```
 In the above code, we declare the *int* `numberInParty` as zero. We then have a *while* statement that will ask for a number until `numberInParty` is greater than zero. Once the number is greater than zero, the program will continue.
 
+# Custom types
+
+As mentioned earlier, you can create your own custom type, called an *object*, *model*, or *class*. We'll call it a *object* for now.
+We have a couple of inputs from the user -- *name* and *number in party*. To emanage this data better, we can create a *player* type that stores this data in one place. 
+
+FURTHER EXPLANATION OF OBJECTS - HOW THEY ARE TEMPLATES AND NEED TO BE INSTANTIATED
+
+We could add this *class* in our "Program.cs* but to keep our code tidy, let's add it as a new file.
+
+Click the add new file icon in VS code to add a new file and call it "Player.cs".
+SCREENSHOT
+Open the file and add the following:
+
+```csharp
+public class Player
+{
+    public string Name {get; set;}
+    public int NumberInParty {get;set;}
+}
+```
+
+We can now update the code in "Program.cs" with our *Player* object, creating a new instance of it.
+
+At the top of the file write the following line:
+
+```csharp
+var myPlayer = new Player();
+```
+There are several ways to *new* up an object, but we don't need to worry about that now.
+
+We can now replace the variables `name` and `numberInParty` with `myPlayer.Name` and `myPlayer.NumberInParty` respectively.
+
+`myPlayer` is now a container for data about the specific user of our game.
+
+Our "Program.cs" file should now look like this:
+
+```csharp
+
+var myPlayer = new Player();
+Console.WriteLine("Hello, What is your name?!");
+
+myPlayer.Name = Console.ReadLine();
+
+Console.WriteLine($"Your name is {myPlayer.Name}");
+
+myPlayer.NumberInParty = 0;
+
+while(myPlayer.NumberInParty < 1)
+{
+    Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
+    string numberInPartyString = Console.ReadLine();
 
 
+    bool canConvertToInt = int.TryParse(numberInPartyString, out int parsedInt);
+
+    myPlayer.NumberInParty = parsedInt;
+    
+    if (canConvertToInt)
+    {
+        Console.WriteLine($"You have {myPlayer.NumberInParty} people in your party");
+    }
+    else
+    {
+        Console.WriteLine("Give me an actual integer!!");
+    }
+}
+
+
+
+```
+
+To finish let's add the follwong line at the end of our code:
+
+```csharp
+Console.WriteLine($"{myPlayer.Name}, you have {myPlayer.NumberInParty} people in your party and you may begin your adventure!!");
+```

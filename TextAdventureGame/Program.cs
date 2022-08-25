@@ -1,22 +1,26 @@
-﻿Console.WriteLine("Hello, What is your name?!");
+﻿
+var myPlayer = new Player();
+Console.WriteLine("Hello, What is your name?!");
 
-var name = Console.ReadLine();
+myPlayer.Name = Console.ReadLine();
 
-Console.WriteLine($"Your name is {name}");
+Console.WriteLine($"Your name is {myPlayer.Name}");
 
-int numberInParty = 0;
+myPlayer.NumberInParty = 0;
 
-while(numberInParty < 1)
+while(myPlayer.NumberInParty < 1)
 {
     Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
     string numberInPartyString = Console.ReadLine();
 
 
-    bool canConvertToInt = int.TryParse(numberInPartyString, out numberInParty);
+    bool canConvertToInt = int.TryParse(numberInPartyString, out int parsedInt);
+
+    myPlayer.NumberInParty = parsedInt;
 
     if (canConvertToInt)
     {
-        Console.WriteLine($"You have {numberInParty} people in your party");
+        Console.WriteLine($"You have {myPlayer.NumberInParty} people in your party");
     }
     else
     {
@@ -24,7 +28,7 @@ while(numberInParty < 1)
     }
 }
 
-
+Console.WriteLine($"{myPlayer.Name}, you have {myPlayer.NumberInParty} people in your party and you may begin your adventure!!");
 
 
 
