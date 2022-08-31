@@ -1,4 +1,5 @@
 
+# Creating your first console application
 ## Introduction
 In this workshop, we will create a basic application called a console application. This is an app that runs on the terminal, sometimes known as the console or command line.
 On a Windows machine, we can use the cmd or Powershell as our console.
@@ -74,6 +75,8 @@ We have made our first program!
 </br></br>
 Let's go edit our program!
 
+# Writing code
+
 Open the `Program.cs` file; this is the entry point of our application and it will look like this:
 
 ```csharp
@@ -84,6 +87,7 @@ It has a `Program` class with a `Main` method inside it.
 The `Console.WriteLine("Hello World!");` is what printed "Hello World!" inside our console.  Change the contents of the `"` marks to say `"Hello, what is your name?"` as shown below.
 
 ```csharp
+// Ask the user to input a name - this a comment!
 Console.WriteLine("Hello, what is your name?");
 ```
 Now if we run the project from the console, using `>dotnet run` again, you should see that our question is printed to the console instead.
@@ -94,7 +98,9 @@ Now if we run the project from the console, using `>dotnet run` again, you shoul
 `Console.WriteLine();` is a method from the `System` library that, in this case, takes a *string* and then writes or prints that string to the console.
 
 ## What's a *string*?
-C# is what's known as a *strongly-typed* language. A *string* is a type. It means that the contents will be treated as text.  There are many types and you can create your own types, often called *models* or *classes*.
+C# is what's known as a *strongly-typed* language. A *string* is a type. It means that the contents will be treated as text.
+These types are simple, meaning they have one value (they are often called *value types*).
+There are many types and you can create your own more complex types, often called *object*,  *models*, or *classes* - depending on where they are used.
 
 Let's see if we can get input from the console.
 
@@ -136,6 +142,157 @@ Console.WriteLine($"Your name is {name}");
 <br/>
 Which makes the code a bit more readable.
 
-So in this workshop, we have learned to take input from a user, assign that to a variable and then combine that input with another string, outputting that to the screen!
+## Other types
+
+The next type we are going to look at is *int* which is short for integer (a whole number).
+Let's start by asking the user for a number.
+
+```csharp
+Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
+string numberInPartyString = Console.ReadLine();
+```
+> Note that the response we get from the user will be a *string. So how do we make it a number?
+
+To convert a string to a number, we need to use a method from a library. This time we will use `TryParse()`. In this instance, we will specifically use `int.TryParse`. This method will take a string, if it can convert it to a number it will return `true` and the `int`, otherwise it will return false.
+
+> `true` and `false` are types known as *bools* or *booleans*.
+
+After we get the value of `numberString` from the user, add the following code:
+
+```csharp
+bool canConvertToInt = int.TryParse(numberInPartyString, out int numberInParty);
+```
+`canConvertToInt` will either be *true* or *false*. If *true*, the variable `numberInParty` will be our converted *string* as an *int*.
+
+For example, if the user inputs the word "three" instead of the number "3", the `canConvertToInt` will be *false*, otherwise it will be *true*.
+
+# Conditional logic
+
+To act on our *true* or *false* we will need to add some conditional logic which will help us control the flow of our project. 
+
+## If else statement
+The first statement we'll use is an *if/else* statement (boolean predicate).
+
+Add the following to your code:
+
+```csharp
+if(canConvertToInt)
+{
+    Console.WriteLine(numberInParty);
+    Console.WriteLine($"You have {numberInParty} people in your party");
+}
+else
+{
+    Console.WriteLine("Give me an actual integer!!");
+}
+```
+
+But, we have a problem.
+
+If we can't get an integer from the input, our code currently doesn't ask the use to reenter, the program just ends. We will need to update our code!
+
+## While statement
+To get our program to ask the user for a number again, we will use a *while* statement. This will need a statement of "truth-i-ness" - meaning *while something is true, do this thing*.
+
+Replace your code from where we asked for the number of people in the party to look like this:
+
+```csharp
+
+int numberInParty = 0;
+
+while(numberInParty < 1)
+{
+    Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
+    string numberInPartyString = Console.ReadLine();
 
 
+    bool canConvertToInt = int.TryParse(numberInPartyString, out numberInParty);
+
+    if (canConvertToInt)
+    {
+        Console.WriteLine($"You have {numberInParty} people in your party");
+    }
+    else
+    {
+        Console.WriteLine("Give me an actual integer!!");
+    }
+}
+```
+In the above code, we declare the *int* `numberInParty` as zero. We then have a *while* statement that will ask for a number until `numberInParty` is greater than zero. Once the number is greater than zero, the program will continue.
+
+# Custom types
+
+As mentioned earlier, you can create your own custom type, called an *object*, *model*, or *class*. We'll call it a *object* for now.
+We have a couple of inputs from the user -- *name* and *number in party*. To emanage this data better, we can create a *player* type that stores this data in one place. 
+
+FURTHER EXPLANATION OF OBJECTS - HOW THEY ARE TEMPLATES AND NEED TO BE INSTANTIATED
+
+We could add this *class* in our "Program.cs* but to keep our code tidy, let's add it as a new file.
+
+Click the add new file icon in VS code to add a new file and call it "Player.cs".
+SCREENSHOT
+Open the file and add the following:
+
+```csharp
+public class Player
+{
+    public string Name {get; set;}
+    public int NumberInParty {get;set;}
+}
+```
+
+We can now update the code in "Program.cs" with our *Player* object, creating a new instance of it.
+
+At the top of the file write the following line:
+
+```csharp
+var myPlayer = new Player();
+```
+There are several ways to *new* up an object, but we don't need to worry about that now.
+
+We can now replace the variables `name` and `numberInParty` with `myPlayer.Name` and `myPlayer.NumberInParty` respectively.
+
+`myPlayer` is now a container for data about the specific user of our game.
+
+Our "Program.cs" file should now look like this:
+
+```csharp
+
+var myPlayer = new Player();
+Console.WriteLine("Hello, What is your name?!");
+
+myPlayer.Name = Console.ReadLine();
+
+Console.WriteLine($"Your name is {myPlayer.Name}");
+
+myPlayer.NumberInParty = 0;
+
+while(myPlayer.NumberInParty < 1)
+{
+    Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
+    string numberInPartyString = Console.ReadLine();
+
+
+    bool canConvertToInt = int.TryParse(numberInPartyString, out int parsedInt);
+
+    myPlayer.NumberInParty = parsedInt;
+    
+    if (canConvertToInt)
+    {
+        Console.WriteLine($"You have {myPlayer.NumberInParty} people in your party");
+    }
+    else
+    {
+        Console.WriteLine("Give me an actual integer!!");
+    }
+}
+
+
+
+```
+
+To finish let's add the follwong line at the end of our code:
+
+```csharp
+Console.WriteLine($"{myPlayer.Name}, you have {myPlayer.NumberInParty} people in your party and you may begin your adventure!!");
+```
