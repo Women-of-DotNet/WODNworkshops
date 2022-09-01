@@ -26,18 +26,16 @@ app.MapGet("/weatherforecast", () =>
     var forecast =  Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
+            //This gets today's date and adds n number of days to it
             DateTime.Now.AddDays(index),
+            // randomly generates a temperature between -20 and 55
             Random.Shared.Next(-20, 55),
+            //Randomly gets a summary from the summary array
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
     return forecast;
-})
-.WithName("GetWeatherForecast");
+});
 
 app.Run();
 
-record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
