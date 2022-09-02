@@ -18,13 +18,13 @@ We will also need a code editor to enable us to edit our code.  [Visual Studio C
 To check if the .NET SDK installed correctly, open the terminal and type in `dotnet` and press enter.
 You should see something similar to this
 <br/><br/>
-![image showing dotnet in the console](/Screenshots/dotnet.png)
+![image showing dotnet in the console](/TextAdventureGame/Screenshots/dotnet.png)
 <br/><br/>
 Now that we know the SDK is installed correctly we can make our first application.
 When you open the terminal it will most likely open in a certain folder or directory on your computer.
 If you type in `ls` and press enter, you should see a list of all the folders and files in the current directory.  It may look something like this:
 <br/><br/>
-![image showing contents of new console app](/Screenshots/ls.png)
+![image showing contents of new console app](/TextAdventureGame/Screenshots/ls.png)
 <br/><br/>
 We need to create a new directory for our code to live in.
 To make a new directory we will use the following command:
@@ -48,7 +48,7 @@ Now we are in the right folder, let's create a new .NET project.
 >dotnet new
 ```
 <br/><br/>
-![image showing dotnet new in the console](/Screenshots/dotnet%20new.png)
+![image showing dotnet new in the console](/TextAdventureGame/Screenshots/dotnet_new.png)
 <br/><br/>
 The above command will bring up all the available templates projects that came with the SDK.  We want to build a console app, so enter the following command:
 </br>
@@ -60,7 +60,7 @@ The above command will bring up all the available templates projects that came w
 This command will create a new Directory called `Adventuring` and add a new console application inside it.
 If cd into the `Adventuring` directory and list all the files we will see with have 2 files called `Program.cs` and `Adventuring.csproj`.
 <br/><br/>
-![image showing contents of new console app](/Screenshots/dotnet%20new%20console.png)
+![image showing contents of new console app](/TextAdventureGame/Screenshots/dotnet_new_console.png)
 <br/><br/>
 We now have a basic application that we can run.
 Type in the following command:
@@ -82,7 +82,6 @@ Open the `Program.cs` file; this is the entry point of our application and it wi
 ```csharp
 Console.WriteLine("Hello World!");
 ```
-It has a `Program` class with a `Main` method inside it.
 
 The `Console.WriteLine("Hello World!");` is what printed "Hello World!" inside our console.  Change the contents of the `"` marks to say `"Hello, what is your name?"` as shown below.
 
@@ -91,6 +90,8 @@ The `Console.WriteLine("Hello World!");` is what printed "Hello World!" inside o
 Console.WriteLine("Hello, what is your name?");
 ```
 Now if we run the project from the console, using `>dotnet run` again, you should see that our question is printed to the console instead.
+
+![image showing console asking user for their name](/TextAdventureGame/Screenshots/console_writeline_askname.png)
 
 ## What's going on?
 .NET comes with a whole load of ready-made code us to use in the form of *libraries*. Behind the scenes, there is an implicit library called `System` and many others. Inside these libraries, we have methods or functions that we can use or call. We can also add more libraries via a service called "NuGet".
@@ -145,7 +146,7 @@ Which makes the code a bit more readable.
 ## Other types
 
 The next type we are going to look at is *int* which is short for integer (a whole number).
-Let's start by asking the user for a number.
+Let's start by asking the user for a number. We can add this after our existing code.
 
 ```csharp
 Console.WriteLine("How many people are joining you on your adventure - including yourself? There must be at least one of you to start the adventure!");
@@ -162,7 +163,7 @@ After we get the value of `numberString` from the user, add the following code:
 ```csharp
 bool canConvertToInt = int.TryParse(numberInPartyString, out int numberInParty);
 ```
-`canConvertToInt` will either be *true* or *false*. If *true*, the variable `numberInParty` will be our converted *string* as an *int*.
+`canConvertToInt` will either be *true* or *false*. If *true*, a new variable called `numberInParty` will be created and assigned our converted *string* as an *int*.
 
 For example, if the user inputs the word "three" instead of the number "3", the `canConvertToInt` will be *false*, otherwise it will be *true*.
 
@@ -223,14 +224,18 @@ In the above code, we declare the *int* `numberInParty` as zero. We then have a 
 # Custom types
 
 As mentioned earlier, you can create your own custom type, called an *object*, *model*, or *class*. We'll call it a *object* for now.
-We have a couple of inputs from the user -- *name* and *number in party*. To emanage this data better, we can create a *player* type that stores this data in one place. 
+We have a couple of inputs from the user -- *name* and *number in party*. To manage this data better, we can create a *player* type that stores this data in one place. 
 
-FURTHER EXPLANATION OF OBJECTS - HOW THEY ARE TEMPLATES AND NEED TO BE INSTANTIATED
+You can think of a model, or class as a template, or blueprint. It sets out what the "shape" of the object will be when created, or instantiated. This shape can include properties on that object, or methods ie. what it can do. As it is just a template, when you want to create something in the shape of that class, you have to *instantiate* an instance of that class. You may also hear this instantiation of a class referred to as "newing up" because we create a new one using some code we will see later with a keyword *new*.
+
+Let's think of this in action with our player. We want to have a blueprint for what a player will look like. It might have properties like their name, and the number of people in their party and this will be set per instance of this player class. 
 
 We could add this *class* in our "Program.cs* but to keep our code tidy, let's add it as a new file.
 
 Click the add new file icon in VS code to add a new file and call it "Player.cs".
-SCREENSHOT
+
+![image of new player class in project](/TextAdventureGame/Screenshots/created_player.png)
+
 Open the file and add the following:
 
 ```csharp
