@@ -6,7 +6,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDependencies(this IServiceCollection services)
     {
 
-        services.AddSingleton<WeatherForecastService>();
+        services.AddScoped<WeatherForecastService>();
 
          //services.AddSingleton(sp => new JsonSerializerOptions
          //   {

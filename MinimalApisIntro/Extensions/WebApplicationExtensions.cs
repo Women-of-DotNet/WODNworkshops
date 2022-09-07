@@ -4,9 +4,11 @@ public static class WebApplicationExtensions
 {
     public static WebApplication AddMinimalApis(this WebApplication app)
     {
-        app.MapGet("/weatherforecast", (WeatherForecastService weatherService) =>
+        app.MapGet("/weatherforecast", (WeatherForecastService weatherService, WeatherForecastService weatherServiceTwo) =>
         {
-            return weatherService.GetForecast();
+            var reqOne = weatherService.GetForecast();
+            var reqTwo = weatherServiceTwo.GetForecast();
+           return new { ReqOne = reqOne[0], ReqTwo = reqTwo[0] };
         });
 
         // update weather forecast
