@@ -9,13 +9,14 @@ public static class WebApplicationExtensions
             return weatherService.GetForecast();
         });
 
-        // update weather forecast
+        // add weather forecast
         app.MapPost("/weatherforecast", 
-        (WeatherForecastService weatherService, [FromBody]WeatherForecastDto forecastDto) =>
+        (WeatherForecastService weatherService, [FromBody]WeatherForecast weatherForecast) =>
         {
-            return weatherService.UpdateTodaysWeather(forecastDto);
+            weatherService.UpdateTodaysWeather(weatherForecast);
         });
 
+        
 
         return app;
     }
