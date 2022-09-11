@@ -11,7 +11,7 @@ public static class WebApplicationExtensions
 
         // add weather forecast
         app.MapPost("/weatherforecast", 
-        (WeatherForecastService weatherService, [FromBody]WeatherForecast weatherForecast) =>
+        (WeatherForecastService weatherService, [FromBody]WeatherForecastDto weatherForecast) =>
         {
             weatherService.UpdateTodaysWeather(weatherForecast);
         });
